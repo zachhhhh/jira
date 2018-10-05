@@ -8,9 +8,7 @@ services:
     networks:
       - jiranet
     volumes:
-      - type: bind
-        source: ./data
-        target: /var/atlassian/jira
+      - /opt/jira/data:/var/atlassian/jira
     ports:
       - '80:8080'
     environment:
@@ -36,9 +34,7 @@ services:
     networks:
       - jiranet
     volumes:
-      - type: bind
-        source: ./postgresqldata
-        target: /var/lib/postgresql/data
+      - /opt/jira/postgresqldata:/var/lib/postgresql/data
     environment:
       - 'POSTGRES_USER=jira'
       # CHANGE THE PASSWORD!
@@ -56,6 +52,12 @@ services:
     labels:
       com.blacklabelops.description: "PostgreSQL Database Server"
       com.blacklabelops.service: "postgresql"
+      
+volumes:
+  jiradata:
+    external: false
+  postgresqldata:
+    external: false
 
 networks:
   jiranet:
