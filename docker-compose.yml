@@ -10,7 +10,7 @@ services:
     volumes:
       - type: bind
         source: /opt/jira/data
-        target: var/atlassian/jira
+        target: /var/atlassian/jira
     ports:
       - '80:8080'
     environment:
